@@ -21,7 +21,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-model_path = 'model'
+model_path = 'minhtu0408/BERT-keyword-extractor'
 ke = ModelKeywordsExplorer(model_path)
 @app.get("/")
 def read_root():
