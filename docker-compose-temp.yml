@@ -1,0 +1,49 @@
+networks:
+  mynetwork:
+    driver: bridge
+
+services:
+  aigdscmeet:
+    container_name: aigdscmeet-socketio
+    build:
+      context: ./AIGDSCMeet
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+      - apiai
+    env_file:
+      - AIGDSCMeet/PATH.env
+    networks:
+      - mynetwork
+
+  redis:
+    container_name: aigdscmeet-redis
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    networks:
+      - mynetwork
+  
+  apiai:
+    container_name: aigdscmeet-api
+    build:
+      context: ./APIAI
+      dockerfile: Dockerfile
+    ports:
+      - "5050:5050"
+    networks:
+      - mynetwork
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+
+
+
+
