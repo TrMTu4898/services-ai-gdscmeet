@@ -20,8 +20,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5300:5300"
-    depends_on:
-      - redis
     env_file:
       - Rebase/PATH.env
     networks:
