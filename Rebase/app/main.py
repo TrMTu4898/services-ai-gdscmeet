@@ -70,17 +70,17 @@ async def disconnect(sid):
     user_info = user_data.pop(sid, None)
     if user_info:
         print(f"Client disconnected: {sid}")
-        meeting_id = user_info.get('MEETINGID')
-        if meeting_id:
-            data_from = await get_data_from_redis(meeting_id)
-            keywords_utf8 = [keyword.decode('utf-8') for keyword in data_from]
-            encoded_keywords = [keyword.encode('utf-8') for keyword in keywords_utf8]
-            keywords_data = {
-                'meeting_id': meeting_id,
-                'keywords': encoded_keywords
-            }
-            # json_to_docx(keywords_data)
-            print(encoded_keywords)
+        # meeting_id = user_info.get('MEETINGID')
+        # if meeting_id:
+        #     data_from = await get_data_from_redis(meeting_id)
+        #     keywords_utf8 = [keyword.decode('utf-8') for keyword in data_from]
+        #     encoded_keywords = [keyword.encode('utf-8') for keyword in keywords_utf8]
+        #     keywords_data = {
+        #         'meeting_id': meeting_id,
+        #         'keywords': encoded_keywords
+        #     }
+        #     # json_to_docx(keywords_data)
+        #     print(encoded_keywords)
 
     await sio.emit('disconnect_message', {'message': 'You have been disconnected.'}, to=sid)
 
@@ -92,7 +92,7 @@ async def speech_to_text_result(sid, data):
         input_mes = app.VietnameseTextNormalizer.Normalize(data)
         start_time = time.time()
         kw_result = KEYWORDS_EXPLORER.generative(input_mes=input_mes)
-        kw_result = await check_and_remove_duplicates(keywords=kw_result, meetingid=meeting_id)
+        #kw_result = await check_and_remove_duplicates(keywords=kw_result, meetingid=meeting_id)
         end_time = time.time()
         date_format = "%d/%m/%Y %H:%M:%S"
         start_at_formatted = datetime.fromtimestamp(start_time).strftime(date_format)

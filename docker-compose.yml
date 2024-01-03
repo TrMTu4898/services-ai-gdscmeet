@@ -1,17 +1,17 @@
 version: '3.8'
 
 services:
-  redis:
-    container_name: aigdscmeet-redis
-    build:
-      context: ./Redis
-      dockerfile: Dockerfile
-    ports:
-      - "6080:6080"
-    networks:
-      - mynetwork
-    volumes:
-      - ./redis.conf:/etc/redis/redis.conf
+#  redis:
+#    container_name: aigdscmeet-redis
+#    build:
+#      context: ./Redis
+#      dockerfile: Dockerfile
+#    ports:
+#      - "6080:6080"
+#    networks:
+#      - mynetwork
+#    volumes:
+#      - ./redis.conf:/etc/redis/redis.conf
 
   rebase:
     container_name: aigdscmeet-socketio-1
