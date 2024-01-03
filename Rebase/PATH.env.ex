@@ -1,0 +1,10 @@
+GEMINI_API_KEY="AIzaSyA6N9hV4IMKHr7YUGSDjDW2Chw9sK0eDzo"
+API_URL="http://aigdscmeet-api:5050/kw"
+REDIS_HOST="aigdscmeet-redis"
+REDIS_PORT="6080"
+REDIS_DB="0"
+REDIS_PASSWORD="123456"
+CLIENT_NAME="AIGDSCMeetKeywords"
+PROXY_ALLOW_IPS='127.0.0.1, localhost, aigdscmeet-api, aigdscmeet-redis, aigdscmeet-websocket, localhost:3000, 172.19.93.107'
+CORS_ORIGINS='["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost", "http://172.19.93.107:3000"]'
+API_SEND_FILE=""

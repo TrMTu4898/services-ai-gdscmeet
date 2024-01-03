@@ -17,7 +17,7 @@ import uvicorn
 load_dotenv(dotenv_path='../PATH.env')
 
 REDIS_HOST = os.getenv("REDIS_HOST", "127.0.0.1")
-REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6080))
 REDIS_DB = int(os.getenv("REDIS_DB", 0))
 REDIS_PASSWORD = os.getenv("REDIS_PASSWORD", None)
 CLIENT_NAME = os.getenv("CLIENT_NAME", "AIGDSCMeetKeywords")
@@ -76,6 +76,7 @@ async def speech_to_text_result(sid, data):
         input_mes = app.VietnameseTextNormalizer.Normalize(data)
         start_time = time.time()
         kw_result = KEYWORDS_EXPLORER.get_keywords(input_mes=input_mes)
+        kw_result = check_and_remove_duplicates(keywords=kw_result, meetingid=meeting_id)
         end_time = time.time()
         date_format = "%d/%m/%Y %H:%M:%S"
         start_at_formatted = datetime.fromtimestamp(start_time).strftime(date_format)
@@ -95,6 +96,7 @@ def authenticate_user(token):
     # Gọi API để xác nhận token
     pass
 
+# sau khi disconnect room tạo file gửi về BE
 def is_host(sid):
     return user_data.get(sid, {}).get('ROLE') == 'HOST'
 
